@@ -35,7 +35,7 @@ def result(request):
     plt.title('Clusters')
     plt.xlabel('x')
     plt.ylabel('y')
-    grid(True) # grey lines my man
+    grid(True)
  
     # Store image in a buffer
     buffer = BytesIO()
