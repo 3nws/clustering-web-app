@@ -17,7 +17,7 @@ def index(request):
     return render(request, './index.html')
  
 def result(request):
-    dataset = pd.read_csv('D:/Shit/Programming/Python shit/clustering-app/mysite/form/Mall_Customers.csv')
+    dataset = pd.read_csv(request.FILES['csv_file'])
     X=dataset.iloc[:, [3,4]].values
     kmeans = KMeans(n_clusters=5, init ='k-means++', max_iter=300, n_init=10,random_state=0 )
     y_kmeans = kmeans.fit_predict(X)
@@ -27,9 +27,9 @@ def result(request):
     plt.scatter(X[y_kmeans==3, 0], X[y_kmeans==3, 1], s=100, c='cyan', label ='Cluster 4')
     plt.scatter(X[y_kmeans==4, 0], X[y_kmeans==4, 1], s=100, c='magenta', label ='Cluster 5')
     plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids')
-    plt.title('Clusters of Customers')
-    plt.xlabel('Annual Income(k$)')
-    plt.ylabel('Spending Score(1-100')
+    plt.title('Clusters')
+    plt.xlabel('x')
+    plt.ylabel('y')
     grid(True) # grey lines my man
  
     # Store image in a buffer
