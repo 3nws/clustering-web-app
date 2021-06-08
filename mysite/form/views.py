@@ -19,10 +19,11 @@ def index(request):
 def result(request):
     dataset = pd.read_csv(request.FILES['csv_file'])
     form = request.POST
-    column_1 = form['column_1']
-    column_2 = form['column_2']
-    X=dataset.iloc[:, [int(column_1),int(column_2)]].values
-    kmeans = KMeans(n_clusters=5, init ='k-means++', max_iter=300, n_init=10,random_state=0 )
+    column_1 = int(form['column_1'])
+    column_2 = int(form['column_2'])
+    num_of_clusters = int(form['cluster-count'])
+    X=dataset.iloc[:, [column_1,column_2]].values
+    kmeans = KMeans(n_clusters=num_of_clusters, init ='k-means++', max_iter=300, n_init=10,random_state=0 )
     y_kmeans = kmeans.fit_predict(X)
     plt.scatter(X[y_kmeans==0, 0], X[y_kmeans==0, 1], s=100, c='red', label ='Cluster 1')
     plt.scatter(X[y_kmeans==1, 0], X[y_kmeans==1, 1], s=100, c='blue', label ='Cluster 2')
