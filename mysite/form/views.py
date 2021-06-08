@@ -47,30 +47,3 @@ def result(request):
  
     # Send buffer in a http response the the browser with the mime type image/png set
     return HttpResponse(buffer.getvalue(), content_type="image/png")
-
-def upload_csv(request):
-    data = {}
-    csv_file = request.FILES['csv_file']
-    if not csv_file.name.endswith('.csv'):
-        pass
-        # error
-    file_data = csv_file.read().decode('utf-8')
-
-    lines = file_data.split('\n')
-    
-    for line in lines:
-        fields = line.split(',')
-        data_dict = {}
-        data_dict['Gender'] = fields[0]
-        data_dict['Age'] = fields[1]
-        data_dict['Annual Income'] = fields[2]
-        data_dict['Spending Score'] = fields[3]
-        
-        form = EventsForm(data_dict)
-        form.save()
-
-    context = {
-        'data': data
-    }
-    
-    return render(request, './csv.html', context)

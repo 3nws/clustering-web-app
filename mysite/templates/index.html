@@ -17,95 +17,136 @@
     <title>Document</title>
   </head>
   <body>
-    <form
-      action="/form/result"
-      method="POST"
-      enctype="multipart/form-data"
-      class="form-horizontal"
-    >
-      {% csrf_token %}
-      <div class="form-group">
-        <label for="name" class="col-md-3 col-sm-3 col-xs-12 control-label"
-          >File:
-        </label>
-        <div class="col-md-8">
-          <input
-            type="file"
-            name="csv_file"
-            id="csv_file"
-            required="True"
-            class="form-control"
-          />
-        </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/form">Upload</a>
+          </li>
+        </ul>
       </div>
-      <div class="form-group">
-        <label for="column-1" class="col-md-3 col-sm-3 col-xs-12 control-label">
-          Column 1: 
-        </label>
-        <div class="col-md-8">
-          <input
-            type="number"
-            name="column_1"
-            id="column_1"
-            required="True"
-            class="form-control"
-          />
+    </nav>
+
+    <div class="container">
+      <form
+        action="/form/result"
+        method="POST"
+        enctype="multipart/form-data"
+        class="form-horizontal"
+      >
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="name" class="col-md-3 col-sm-3 col-xs-12 control-label"
+            >File:
+          </label>
+          <div class="col-md-8">
+            <input
+              type="file"
+              name="csv_file"
+              id="csv_file"
+              required="True"
+              class="form-control"
+            />
+          </div>
         </div>
-        <label for="column-2" class="col-md-3 col-sm-3 col-xs-12 control-label">
-          Column 2: 
-        </label>
-        <div class="col-md-8">
-          <input
-            type="number"
-            name="column_2"
-            id="column_2"
-            required="True"
-            class="form-control"
-          />
+        <div class="form-group">
+          <label
+            for="column-1"
+            class="col-md-3 col-sm-3 col-xs-12 control-label"
+          >
+            Column 1:
+          </label>
+          <div class="col-md-8">
+            <input
+              type="number"
+              name="column_1"
+              id="column_1"
+              required="True"
+              class="form-control"
+            />
+          </div>
+          <label
+            for="column-2"
+            class="col-md-3 col-sm-3 col-xs-12 control-label"
+          >
+            Column 2:
+          </label>
+          <div class="col-md-8">
+            <input
+              type="number"
+              name="column_2"
+              id="column_2"
+              required="True"
+              class="form-control"
+            />
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="cluster-count" class="col-md-3 col-sm-3 col-xs-12 control-label">
-          Number of clusters: 
-        </label>
-        <div class="col-md-8">
-          <input
-            type="number"
-            name="cluster-count"
-            id="cluster-count"
-            required="True"
-            class="form-control"
-          />
+        <div class="form-group">
+          <label
+            for="cluster-count"
+            class="col-md-3 col-sm-3 col-xs-12 control-label"
+          >
+            Number of clusters:
+          </label>
+          <div class="col-md-8">
+            <input
+              type="number"
+              name="cluster-count"
+              id="cluster-count"
+              required="True"
+              class="form-control"
+            />
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="max_iter" class="col-md-3 col-sm-3 col-xs-12 control-label">
-          Max iterations:  
-        </label>
-        <div class="col-md-8">
-          <input
-            type="number"
-            name="max_iter"
-            id="max_iter"
-            required="True"
-            class="form-control"
-          />
+        <div class="form-group">
+          <label
+            for="max_iter"
+            class="col-md-3 col-sm-3 col-xs-12 control-label"
+          >
+            Max iterations:
+          </label>
+          <div class="col-md-8">
+            <input
+              type="number"
+              name="max_iter"
+              id="max_iter"
+              required="True"
+              class="form-control"
+            />
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <div
-          class="col-md-3 col-sm-3 col-xs-12 col-md-offset-3"
-          style="margin-bottom: 10px"
-        >
-          <button class="btn btn-primary">
-            <span
-              class="glyphicon glyphicon-upload"
-              style="margin-right: 5px"
-            ></span
-            >Upload
-          </button>
+        <div class="form-group">
+          <div
+            class="col-md-3 col-sm-3 col-xs-12 col-md-offset-3"
+            style="margin-bottom: 10px"
+          >
+            <button class="btn btn-primary">
+              <span
+                class="glyphicon glyphicon-upload"
+                style="margin-right: 5px"
+              ></span
+              >Upload
+            </button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </body>
 </html>
