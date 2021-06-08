@@ -22,6 +22,7 @@ def result(request):
     column_1 = int(form['column_1'])
     column_2 = int(form['column_2'])
     num_of_clusters = int(form['cluster-count'])
+    max_iterations = int(form['max_iter'])
     X=dataset.iloc[:, [column_1,column_2]].values
     kmeans = KMeans(n_clusters=num_of_clusters, init ='k-means++', max_iter=300, n_init=10,random_state=0 )
     y_kmeans = kmeans.fit_predict(X)
