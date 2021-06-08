@@ -18,7 +18,7 @@
   </head>
   <body>
     <form
-      action="/form/result"
+      action="/form/showimage"
       method="POST"
       enctype="multipart/form-data"
       class="form-horizontal"
@@ -53,21 +53,5 @@
         </div>
       </div>
     </form>
-    <a href="#" id="plot">Plot</a>
-
-    <div id="imagediv"></div>
-    <script>
-      $("#plot").click(function () {
-        $.ajax({
-          type: "GET",
-          url: "/form/plot/",
-          data: "str",
-          cache: false,
-          success: function (data) {
-            $("#imagediv").html(data);
-          },
-        });
-      });
-    </script>
   </body>
 </html>

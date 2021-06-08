@@ -1,29 +1,38 @@
 from django.shortcuts import render
 
+from sklearn.cluster import KMeans
 from django.http import HttpResponse, JsonResponse
-from matplotlib import pylab
+import matplotlib.pyplot as plt
 from pylab import *
+from matplotlib import pylab
 import PIL, PIL.Image
 from io import BytesIO
 import base64
+import pandas as pd
+import numpy as np
 
 # Create your views here.
 
 def index(request):
     return render(request, './index.html')
  
-def showimage(request):
-    # Construct the graph
-    t = arange(0.0, 2.0, 0.01)
-    s = sin(2*pi*t)
-    plot(t, s, linewidth=1.0)
+def result(request):
+    dataset = pd.read_csv('D:/Shit/Programming/Python shit/clustering-app/mysite/form/Mall_Customers.csv')
+    X=dataset.iloc[:, [3,4]].values
+    kmeans = KMeans(n_clusters=5, init ='k-means++', max_iter=300, n_init=10,random_state=0 )
+    y_kmeans = kmeans.fit_predict(X)
+    plt.scatter(X[y_kmeans==0, 0], X[y_kmeans==0, 1], s=100, c='red', label ='Cluster 1')
+    plt.scatter(X[y_kmeans==1, 0], X[y_kmeans==1, 1], s=100, c='blue', label ='Cluster 2')
+    plt.scatter(X[y_kmeans==2, 0], X[y_kmeans==2, 1], s=100, c='green', label ='Cluster 3')
+    plt.scatter(X[y_kmeans==3, 0], X[y_kmeans==3, 1], s=100, c='cyan', label ='Cluster 4')
+    plt.scatter(X[y_kmeans==4, 0], X[y_kmeans==4, 1], s=100, c='magenta', label ='Cluster 5')
+    plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids')
+    plt.title('Clusters of Customers')
+    plt.xlabel('Annual Income(k$)')
+    plt.ylabel('Spending Score(1-100')
+    grid(True) # grey lines my man
  
-    xlabel('time (s)')
-    ylabel('voltage (mV)')
-    title('About as simple as it gets, folks')
-    grid(True)
- 
-    # Store image in a string buffer
+    # Store image in a buffer
     buffer = BytesIO()
     canvas = pylab.get_current_fig_manager().canvas
     canvas.draw()
