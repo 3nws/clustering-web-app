@@ -11,6 +11,8 @@ import base64
 import pandas as pd
 import numpy as np
 
+matplotlib.use('Agg')
+
 # Create your views here.
 
 def index(request):
@@ -35,18 +37,47 @@ def result(request):
     plt.title('Clusters')
     plt.xlabel('x')
     plt.ylabel('y')
+    # plt.savefig("static/img/clusters.png")
     grid(True)
+    
+    
  
     # Store image in a buffer
-    buffer = BytesIO()
+    buffer1 = BytesIO()
     canvas = pylab.get_current_fig_manager().canvas
     canvas.draw()
     pilImage = PIL.Image.frombytes("RGB", canvas.get_width_height(), canvas.tostring_rgb())
-    pilImage.save(buffer, "PNG")
+    pilImage.save(buffer1, "PNG")
     pylab.close()
  
-    image = (base64.b64encode(buffer.getvalue())).decode('utf8')
+    # elbow
+    ssd = []
+    for i in range(1, 10):
+        kmeans = KMeans(n_clusters = i, init = 'k-means++', random_state = 5)
+        kmeans.fit(X)
+        ssd.append(kmeans.inertia_)
+    plt.plot(range(1, 10), ssd)
+    plt.grid()
+    plt.title('The Elbow Method', fontsize =10)
+    plt.xlabel('Number of clusters', fontsize =10)
+    plt.ylabel('SSD',fontsize =10)
+    # plt.savefig("static/img/elbow.png")
+    grid(True)
+    
+    result = (base64.b64encode(buffer1.getvalue())).decode('utf8')
+ 
+    # Store image in a buffer
+    buffer2 = BytesIO()
+    canvas = pylab.get_current_fig_manager().canvas
+    canvas.draw()
+    pilImage = PIL.Image.frombytes("RGB", canvas.get_width_height(), canvas.tostring_rgb())
+    pilImage.save(buffer2, "PNG")
+    pylab.close()
+ 
+    elbow = (base64.b64encode(buffer2.getvalue())).decode('utf8')
+    
     context = {
-        'img': image,
+        'result': result,
+        'elbow': elbow,
     }
     return render(request, './result.html', context=context)
