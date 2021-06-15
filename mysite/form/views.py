@@ -45,5 +45,8 @@ def result(request):
     pilImage.save(buffer, "PNG")
     pylab.close()
  
-    # Send buffer in a http response the the browser with the mime type image/png set
-    return HttpResponse(buffer.getvalue(), content_type="image/png")
+    image = (base64.b64encode(buffer.getvalue())).decode('utf8')
+    context = {
+        'img': image,
+    }
+    return render(request, './result.html', context=context)
