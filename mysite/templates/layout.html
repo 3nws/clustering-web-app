@@ -19,11 +19,8 @@
     <title>Document</title>
   </head>
   <body>
-    {% include 'partials/navbar.html' %}
-    <div class="container mt-5">
-        {% block content %} 
-        
-        {% endblock %}
+    <div class="container">
+      {% include 'partials/navbar.html' %} {% block content %} {% endblock %}
     </div>
   </body>
 </html>

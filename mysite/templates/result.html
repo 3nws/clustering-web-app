@@ -1,5 +1,20 @@
 {% extends 'layout.html' %} {% load static %} {% block content %}
-<h1 style="text-align:center;">Here is your result</h1>
-<img src="data:image/png;base64,{{result}}" class="mx-auto d-block" alt="" />
-<img src="data:image/png;base64,{{elbow}}" class="mx-auto d-block" alt="" />
+
+<link rel="stylesheet" href="{% static 'stylesheets/styles.css' %}" />
+
+<header class="head-form" style="margin-bottom: 2%;">
+  <h2>Here is your result</h2>
+</header>
+<div class="row gradient-border" id="box">
+  <div class="col-md-6 plot">
+    <img src="data:image/png;base64,{{elbow}}" class="mx-auto d-block" alt="" />
+  </div>
+  <div class="col-md-6 plot">
+    <img
+      src="data:image/png;base64,{{result}}"
+      class="mx-auto d-block"
+      alt=""
+    />
+  </div>
+</div>
 {% endblock %}
