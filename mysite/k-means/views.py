@@ -15,8 +15,8 @@ matplotlib.use('Agg')
 
 # Create your views here.
 
-def index(request):
-    return render(request, './index.html')
+def k_means(request):
+    return render(request, './k-means.html')
  
 def result(request):
     dataset = pd.read_csv(request.FILES['csv_file'])

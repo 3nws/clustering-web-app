@@ -4,5 +4,5 @@ from . import views
 
 urlpatterns = [
     path('result', views.result, name='result'),
-    path('', views.index, name='index'),
+    path('', views.k_means, name='k-means'),
 ]
