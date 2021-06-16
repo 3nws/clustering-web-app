@@ -15,6 +15,9 @@ matplotlib.use('Agg')
 
 # Create your views here.
 
+def analysis(request):
+    return render(request, './home.html')
+
 def k_means(request):
     return render(request, './k-means.html')
  
