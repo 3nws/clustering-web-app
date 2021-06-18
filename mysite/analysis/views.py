@@ -28,6 +28,8 @@ def k_means(request):
  
 def result(request):
     dataset = pd.read_csv(request.FILES['csv_file'])
+    
+    # will create a form model later
     form = request.POST
     column_1 = int(form['column_1'])
     column_2 = int(form['column_2'])
