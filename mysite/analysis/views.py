@@ -34,12 +34,33 @@ def result(request):
     num_of_clusters = int(form['cluster-count'])
     max_iterations = int(form['max_iter'])
     kmeans_algo = str(form['kmeans_algo'])
+    
     X=dataset.iloc[:, [column_1,column_2]].values
+    
     try:
         if form['isNormalized']:
             X = normalize(X)
     except KeyError:
         pass
+    
+    # unclustered
+    plt.scatter(X[:, 0], X[:, 1])
+    plt.title('Unclustered data')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    grid(True)
+    
+    # Store image in a buffer
+    buffer_unclustered = BytesIO()
+    canvas = pylab.get_current_fig_manager().canvas
+    canvas.draw()
+    pilImage = PIL.Image.frombytes("RGB", canvas.get_width_height(), canvas.tostring_rgb())
+    pilImage.save(buffer_unclustered, "PNG")
+    pylab.close()
+    
+    unclustered = (base64.b64encode(buffer_unclustered.getvalue())).decode('utf8')
+    
+    
     kmeans = KMeans(n_clusters=num_of_clusters, init ='k-means++', max_iter=300, n_init=10,random_state=0, algorithm=kmeans_algo)
     y_kmeans = kmeans.fit_predict(X)
     plt.scatter(X[y_kmeans==0, 0], X[y_kmeans==0, 1], s=100, c='red', label ='Cluster 1')
@@ -93,5 +114,6 @@ def result(request):
     context = {
         'result': result,
         'elbow': elbow,
+        'unclustered': unclustered,
     }
     return render(request, './result.html', context=context)
