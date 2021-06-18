@@ -80,17 +80,26 @@
           />
         </div>
       </div>
+      <div class="row mt-2">
+        <div class="col-md-8">
+          <label for="kmeans_algo">Algorithm: </label>
+          <select name="kmeans_algo" id="kmeans_algo">
+            <option value="auto">Auto</option>
+            <option value="full">Full</option>
+            <option value="elkan">Elkan</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label for="isNormalized">Normalize?</label>
+          <input type="checkbox" name="isNormalized" id="isNormalized">
+        </div>
+      </div>
     </div>
+
     <div class="form-group">
-      <div
-        class="col-xs-12 col-md-offset-3 mt-3"
-        style="margin-bottom: 10px"
-      >
+      <div class="col-xs-12 col-md-offset-3 mt-3" style="margin-bottom: 10px">
         <button class="btn btn-secondary">
-          <span
-            class="glyphicon glyphicon-upload"
-          ></span
-          >Analyze
+          <span class="glyphicon glyphicon-upload"></span>Analyze
         </button>
       </div>
     </div>

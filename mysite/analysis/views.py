@@ -13,6 +13,11 @@ import numpy as np
 
 matplotlib.use('Agg')
 
+def normalize(matrix):
+    norm = np.linalg.norm(matrix)
+    matrix = matrix/norm  # normalized matrix
+    return matrix
+
 # Create your views here.
 
 def analysis(request):
@@ -28,8 +33,14 @@ def result(request):
     column_2 = int(form['column_2'])
     num_of_clusters = int(form['cluster-count'])
     max_iterations = int(form['max_iter'])
+    kmeans_algo = str(form['kmeans_algo'])
     X=dataset.iloc[:, [column_1,column_2]].values
-    kmeans = KMeans(n_clusters=num_of_clusters, init ='k-means++', max_iter=300, n_init=10,random_state=0 )
+    try:
+        if form['isNormalized']:
+            X = normalize(X)
+    except KeyError:
+        pass
+    kmeans = KMeans(n_clusters=num_of_clusters, init ='k-means++', max_iter=300, n_init=10,random_state=0, algorithm=kmeans_algo)
     y_kmeans = kmeans.fit_predict(X)
     plt.scatter(X[y_kmeans==0, 0], X[y_kmeans==0, 1], s=100, c='red', label ='Cluster 1')
     plt.scatter(X[y_kmeans==1, 0], X[y_kmeans==1, 1], s=100, c='blue', label ='Cluster 2')
