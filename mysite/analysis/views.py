@@ -27,8 +27,7 @@ def k_means(request):
     return render(request, './k-means.html')
  
 def result(request):
-    dataset = pd.read_csv(request.FILES['csv_file'])
-    
+    dataset = pd.read_csv(request.FILES['csv_file'],header=0)
     # will create a form model later
     form = request.POST
     column_1 = int(form['column_1'])
@@ -48,8 +47,8 @@ def result(request):
     # unclustered
     plt.scatter(X[:, 0], X[:, 1])
     plt.title('Unclustered data')
-    plt.xlabel('x')
-    plt.ylabel('y')
+    plt.xlabel(dataset.columns[column_1])
+    plt.ylabel(dataset.columns[column_2])
     grid(True)
     
     # Store image in a buffer
@@ -72,8 +71,8 @@ def result(request):
     plt.scatter(X[y_kmeans==4, 0], X[y_kmeans==4, 1], s=100, c='magenta', label ='Cluster 5')
     plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids')
     plt.title('Clusters')
-    plt.xlabel('x')
-    plt.ylabel('y')
+    plt.xlabel(dataset.columns[column_1])
+    plt.ylabel(dataset.columns[column_2])
     # plt.savefig("static/img/clusters.png")
     grid(True)
     
