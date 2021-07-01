@@ -50,6 +50,7 @@ def result(request):
     plt.xlabel(dataset.columns[column_1])
     plt.ylabel(dataset.columns[column_2])
     grid(True)
+    plt.savefig("static/img/unclustered.png", transparent=True)
     
     # Store image in a buffer
     buffer_unclustered = BytesIO()
@@ -73,8 +74,8 @@ def result(request):
     plt.title('Clusters')
     plt.xlabel(dataset.columns[column_1])
     plt.ylabel(dataset.columns[column_2])
-    # plt.savefig("static/img/clusters.png")
     grid(True)
+    plt.savefig("static/img/clusters.png", transparent=True)
     
     
  
@@ -97,8 +98,8 @@ def result(request):
     plt.title('The Elbow Method', fontsize =10)
     plt.xlabel('Number of clusters', fontsize =10)
     plt.ylabel('SSD',fontsize =10)
-    # plt.savefig("static/img/elbow.png")
     grid(True)
+    plt.savefig("static/img/elbow.png", transparent=True)
     
     result = (base64.b64encode(buffer1.getvalue())).decode('utf8')
  

@@ -3,3 +3,4 @@ mysite/.env
 mysite/__pycache__/
 *.pyc
 *.pyc
+mysite/static/img/
