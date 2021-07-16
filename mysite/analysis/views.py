@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+import os
+from dotenv import load_dotenv
 from sklearn.cluster import KMeans
 from django.http import HttpResponse, JsonResponse
 import matplotlib.pyplot as plt
@@ -10,8 +12,23 @@ from io import BytesIO
 import base64
 import pandas as pd
 import numpy as np
+import chart_studio
+import plotly.graph_objects as go
+import chart_studio.plotly as py
+import chart_studio.tools as tls
+import plotly.graph_objs as pgo
+import plotly.express as px
+
+import glob
+
+load_dotenv()
 
 matplotlib.use('Agg')
+
+username = "3nws"
+API_KEY = os.getenv('PLOTLY_API_KEY')
+
+tls.set_credentials_file(username=username, api_key=API_KEY)
 
 def normalize(matrix):
     norm = np.linalg.norm(matrix)
@@ -37,6 +54,9 @@ def result(request):
     kmeans_algo = str(form['kmeans_algo'])
     
     X=dataset.iloc[:, [column_1,column_2]].values
+    fig = px.scatter(x=dataset.iloc[:, column_1].values,y=dataset.iloc[:, column_2].values)
+    py.plot(fig, filename= "k-means-scatter", auto_open=False)
+    # fig.write_html('static/plots/first_figure.html', auto_open=True) I LL TRY THIS LATER
     
     try:
         if form['isNormalized']:

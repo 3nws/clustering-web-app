@@ -2,32 +2,42 @@
 
 <link rel="stylesheet" href="{% static 'stylesheets/styles.css' %}" />
 
-<header class="head-form" style="margin-bottom: 2%;">
+<header class="head-form" style="margin-bottom: 2%">
   <h2>Here is your result</h2>
 </header>
 <div class="row gradient-border box">
   <div class="col-md-12 plot">
-    <img src="{% static 'img/unclustered.png' %}" class="mx-auto d-block" alt="" />
+    <img
+      src="{% static 'img/unclustered.png' %}"
+      class="mx-auto d-block"
+      alt=""
+    />
   </div>
   <!-- <div class="col-md-6 plot">
     <img src="data:image/png;base64,{{elbow}}" class="mx-auto d-block" alt="" />
   </div> -->
 </div>
 <div class="row gradient-border box p-5">
-  <div class="col-md-6 plot">
+  <div class="col-md-12 plot">
     <img src="{% static 'img/elbow.png' %}" class="mx-auto d-block" alt="" />
   </div>
-  <div class="col-md-6 plot">
-    <img
-      src="{% static 'img/clusters.png' %}"
-      class="mx-auto d-block"
-      alt=""
-    />
+</div>
+
+<div class="row gradient-border box p-5">
+  <div class="col-md-12 plot">
+    <iframe
+      width="50%"
+      height="500"
+      frameborder="0"
+      scrolling="no"
+      style="margin-left:25%"
+      src="//plotly.com/~3nws/11.embed"
+    ></iframe>
   </div>
 </div>
 
 <style>
-  body{
+  body {
     height: 100% !important;
   }
 </style>
